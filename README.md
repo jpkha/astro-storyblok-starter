@@ -63,12 +63,19 @@ Briefly, with `[...path]` you can generate any path depth you need.
 
 ## Development
 
-You can use this command `npm run dev-sb', in order to launch the server and the proxy so you can embedded your localhost in Storyblok
+In this repository we use `@vitejs/plugin-basic-ssl` so the application will be launch at https://127.0.0.1:3000/ by default and you should not have any problem to embedded your app in Storyblok.
+
+### Alternative method
+
+<u>If you have some issue</u>, you can also try this :
+
+Use this command `npm run dev-sb`, in order to launch the application and the proxy so you can embedded your localhost in Storyblok
+
 ```
 "dev-sb": "astro dev & local-ssl-proxy --source 3010 --target 3000 --cert localhost.pem --key localhost-key.pem"
 ```
 
-If you haven't set any https://localhost:3010 yet, you can check :
+If you haven't set any https://localhost:3010 yet, you need to use `mkcert` :
 
 - [Setting up Dev Server with HTTPS Proxy On macOS](https://www.storyblok.com/faq/setup-dev-server-https-proxy)
 - [Setting up Dev Server with HTTPS Proxy On Windows](https://www.storyblok.com/faq/setup-dev-server-https-windows)
