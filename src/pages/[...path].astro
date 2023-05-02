@@ -3,14 +3,12 @@ export const prerender = true;
 import { useStoryblokApi } from '@storyblok/astro'
 import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro'
 import BaseLayout from '../layouts/BaseLayout.astro'
-import { loadEnv } from "vite";
-const { PUBLIC_ENV} = loadEnv(import.meta.env.MODE, process.cwd(), "");
 
 export async function getStaticPaths() {
 	const storyblokApi = useStoryblokApi()
 
 	const { data } = await storyblokApi.get('cdn/links', {
-		version: PUBLIC_ENV === 'preview' ? 'draft' : 'published',
+		version: import.meta.env.PUBLIC_ENV === 'preview' ? 'draft' : 'published',
 	})
 	const links = Object.values(data.links).filter((link) => link.slug !== 'home' && !link.is_folder)
 
@@ -26,7 +24,7 @@ const { path } = Astro.params
 const storyblokApi = useStoryblokApi()
 
 const { data } = await storyblokApi.get(`cdn/stories/${path}`, {
-  version: PUBLIC_ENV === 'preview' ? 'draft' : 'published',
+  version: import.meta.env.PUBLIC_ENV  === 'preview' ? 'draft' : 'published',
 })
 
 const story = data.story
